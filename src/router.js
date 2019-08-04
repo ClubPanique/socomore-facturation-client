@@ -8,10 +8,10 @@ import VueRessource from 'vue-resource';
 Vue.use(VueRouter);
 Vue.use(VueRessource);
 
-//Import des composants
-import Home from './components/Home';
-import Invoices from './components/Invoices';
-import Suppliers from './components/Suppliers';
+//Import des composants à utiliser avec le router-view.
+import Home from './views/Home';
+import Invoices from './views/Invoices';
+import Suppliers from './views/Suppliers';
 
 //Définition des routes et des composants à charger pour chaque route.
 const routes = [
