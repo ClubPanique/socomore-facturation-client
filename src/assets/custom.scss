@@ -3,3 +3,8 @@ $theme-colors: (
   'secondary': #e85e0e,
   'danger': #e8270e,
 );
+
+//Enlève le border-radius sur les boutons :
+$btn-border-radius: none;
+$btn-border-radius-lg: none;
+$btn-border-radius-sm: none;
