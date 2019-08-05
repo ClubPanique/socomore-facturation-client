@@ -4,10 +4,10 @@ import App from './App.vue';
 
 //Import des icones font awesome pour Vue :
 import {library} from '@fortawesome/fontawesome-svg-core';
-import {faTrash, faEdit} from '@fortawesome/free-solid-svg-icons';
+import {faTrash, faEdit, faPlus} from '@fortawesome/free-solid-svg-icons';
 import {FontAwesomeIcon} from '@fortawesome/vue-fontawesome';
 
-library.add(faTrash, faEdit);
+library.add(faTrash, faEdit, faPlus);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 

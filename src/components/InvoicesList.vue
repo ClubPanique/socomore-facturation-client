@@ -17,7 +17,13 @@
           <td>{{list[index].price_notax}} €</td>
           <td>{{translateStatus(list[index].status)}}</td>
           <td class="text-center align-middle">
-            <ButtonEdit />
+            <button
+              class="btn-lg btn-primary"
+              align="center"
+              @click="$router.push(`factures/modifier/${list[index].id}`)"
+            >
+              <font-awesome-icon icon="edit" />
+            </button>
           </td>
           <td class="text-center align-middle">
             <button class="btn-lg btn-danger" @click="deleteInvoice(list[index].id)">
@@ -95,7 +101,7 @@ export default {
           status = "Reçue";
           break;
         case "reminder":
-          status = "relance";
+          status = "Relance";
           break;
         case "payed":
           status = "Payée";

@@ -1,7 +1,7 @@
 <template>
   <div id="button-more">
-    <button class="btn-lg btn-primary" @click="$router.push(button.route)">
-      <font-awesome-icon icon="edit" />
+    <button class="btn-lg btn-secondary" @click="$router.push(button.route)">
+      <font-awesome-icon icon="plus" />
     </button>
   </div>
 </template>

@@ -12,16 +12,20 @@ Vue.use(VueRessource);
 import Home from './views/Home';
 import Invoices from './views/Invoices/Invoices';
 import AddInvoice from './views/Invoices/AddInvoice';
+import EditInvoice from './views/Invoices/EditInvoice';
 import Suppliers from './views/Suppliers/Suppliers';
 import AddSupplier from './views/Suppliers/AddSupplier';
+import EditSupplier from './views/Suppliers/EditSupplier';
 
 //Définition des routes et des composants à charger pour chaque route.
 const routes = [
   {path: '/', component: Home},
   {path: '/fournisseurs', component: Suppliers},
   {path: '/fournisseurs/ajouter', component: AddSupplier},
+  {path: '/fournisseurs/modifier/:id', component: EditSupplier},
   {path: '/factures', component: Invoices},
-  {path: '/factures/ajouter', component: AddInvoice}
+  {path: '/factures/ajouter', component: AddInvoice},
+  {path: '/factures/modifier/:id', component: EditInvoice},
 ];
 
 //Création du routeur.

@@ -19,7 +19,13 @@
           <td>{{list[index].city}}</td>
           <td>{{list[index].country}}</td>
           <td class="text-center align-middle">
-            <ButtonEdit />
+            <button
+              class="btn-lg btn-primary"
+              align="center"
+              @click="$router.push(`fournisseurs/modifier/${list[index].id}`)"
+            >
+              <font-awesome-icon icon="edit" />
+            </button>
           </td>
           <td class="text-center align-middle">
             <button class="btn-lg btn-danger" @click="deleteSupplier(list[index].id)">
@@ -44,7 +50,8 @@ export default {
   components: { ButtonEdit, ButtonMore },
   data() {
     return {
-      list: []
+      list: [],
+      button: ""
     };
   },
   methods: {
