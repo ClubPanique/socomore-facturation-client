@@ -15,7 +15,7 @@
           <td>{{formatDate(list[index].date)}}</td>
           <td>{{list[index].supplier_id}}</td>
           <td>{{list[index].price_notax}} €</td>
-          <td>{{list[index].status}}</td>
+          <td>{{translateStatus(list[index].status)}}</td>
           <td class="text-center align-middle">
             <ButtonEdit />
           </td>
@@ -47,20 +47,6 @@ export default {
     };
   },
   methods: {
-    //Fonction pour transformer les dates de mySQL en javascript
-    formatDate: function(date) {
-      let dateFormat = date.slice(0, 10).replace(/[-]/g, "/");
-      let jsDate = new Date(Date.parse(dateFormat));
-      let year = jsDate.getFullYear();
-      let month = jsDate.getMonth();
-      let day = jsDate.getDate();
-      if (year) {
-        if (day < 10 && month < 10) return `0${day}/0${month}/${year}`;
-        else if (day < 10) return `0${day}/${month}/${year}`;
-        else if (month < 10) return `${day}/0${month}/${year}`;
-        return `${day}/${month}/${year}`;
-      }
-    },
     //Fonction pour récupérer la liste des fournisseurs à partir de l'API (en utilisant Vue Resource)
     listInvoices: async function() {
       this.$http.get(`${rootURL}invoices/`).then(
@@ -85,6 +71,39 @@ export default {
           }
         );
       }
+    },
+    //Fonction pour transformer les dates de mySQL en javascript
+    formatDate: function(date) {
+      let dateFormat = date.slice(0, 10).replace(/[-]/g, "/");
+      let jsDate = new Date(Date.parse(dateFormat));
+      let year = jsDate.getFullYear();
+      let month = jsDate.getMonth();
+      let day = jsDate.getDate();
+      if (year) {
+        if (day < 10 && month < 10) return `0${day}/0${month}/${year}`;
+        else if (day < 10) return `0${day}/${month}/${year}`;
+        else if (month < 10) return `${day}/0${month}/${year}`;
+        return `${day}/${month}/${year}`;
+      }
+    },
+    translateStatus: function(status) {
+      switch (status) {
+        case "emitted":
+          status = "Emise";
+          break;
+        case "received":
+          status = "Reçue";
+          break;
+        case "reminder":
+          status = "relance";
+          break;
+        case "payed":
+          status = "Payée";
+          break;
+        default:
+          status;
+      }
+      return status;
     }
   },
   //Appel de la fonction à la création du composant.
