@@ -40,7 +40,11 @@ import ButtonMore from "../components/Buttons/ButtonMore";
 
 export default {
   name: "InvoicesList",
+<<<<<<< HEAD
   props: ["list", "listInvoices"],
+=======
+  props: ["list"],
+>>>>>>> 95359f41e5e984e05f05c5b4a0e16363155362ca
   components: { ButtonEdit, ButtonDelete, ButtonMore },
   methods: {
     //Fonction pour transformer les dates de mySQL en javascript
