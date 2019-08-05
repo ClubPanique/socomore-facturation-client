@@ -33,7 +33,12 @@
             </button>
           </td>
           <td class="text-center align-middle">
-            <ButtonMore />
+            <button
+              class="btn-lg btn-secondary"
+              @click="$router.push(`fournisseurs/${list[index].id}`)"
+            >
+              <font-awesome-icon icon="plus" />
+            </button>
           </td>
         </tr>
       </tbody>

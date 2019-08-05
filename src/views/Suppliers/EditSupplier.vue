@@ -124,7 +124,7 @@ export default {
         postcode: "",
         city: "",
         country: "",
-        phone: "" /* this.cleanPhone */,
+        phone: "",
         iban: "",
         swift_bic: "",
         account: ""

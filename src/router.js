@@ -9,11 +9,15 @@ Vue.use(VueRouter);
 Vue.use(VueRessource);
 
 //Import des composants à utiliser avec le router-view.
+//Vue accueil
 import Home from './views/Home';
+//Vues factures.
 import Invoices from './views/Invoices/Invoices';
 import AddInvoice from './views/Invoices/AddInvoice';
 import EditInvoice from './views/Invoices/EditInvoice';
+//Vues fournisseurs.
 import Suppliers from './views/Suppliers/Suppliers';
+import Details from './views/Suppliers/Details';
 import AddSupplier from './views/Suppliers/AddSupplier';
 import EditSupplier from './views/Suppliers/EditSupplier';
 
@@ -21,6 +25,7 @@ import EditSupplier from './views/Suppliers/EditSupplier';
 const routes = [
   {path: '/', component: Home},
   {path: '/fournisseurs', component: Suppliers},
+  {path: '/fournisseurs/:id', component: Details},
   {path: '/fournisseurs/ajouter', component: AddSupplier},
   {path: '/fournisseurs/modifier/:id', component: EditSupplier},
   {path: '/factures', component: Invoices},
