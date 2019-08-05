@@ -22,7 +22,9 @@
             <ButtonEdit />
           </td>
           <td class="text-center align-middle">
-            <ButtonDelete @click="deleteSupplier(list[index].id)" />
+            <button class="btn-lg btn-danger" @click="deleteSupplier(list[index].id)">
+              <font-awesome-icon icon="trash" />
+            </button>
           </td>
           <td class="text-center align-middle">
             <ButtonMore />
@@ -35,12 +37,11 @@
 
 <script>
 import ButtonEdit from "../components/Buttons/ButtonEdit";
-import ButtonDelete from "../components/Buttons/ButtonDelete";
 import ButtonMore from "../components/Buttons/ButtonMore";
 
 export default {
   name: "SuppliersList",
-  components: { ButtonEdit, ButtonDelete, ButtonMore },
+  components: { ButtonEdit, ButtonMore },
   data() {
     return {
       list: []

@@ -20,7 +20,9 @@
             <ButtonEdit />
           </td>
           <td class="text-center align-middle">
-            <ButtonDelete @click="deleteInvoice(list[index].id)" />
+            <button class="btn-lg btn-danger" @click="deleteInvoice(list[index].id)">
+              <font-awesome-icon icon="trash" />
+            </button>
           </td>
           <td class="text-center align-middle">
             <ButtonMore />
