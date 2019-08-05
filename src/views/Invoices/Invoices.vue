@@ -1,7 +1,7 @@
 <template>
   <div class="invoices">
     <h1>Page factures</h1>
-    <InvoicesList :list="list" :listInvoices="listInvoices" />
+    <InvoicesList />
     <ButtonAdd :button="button" />
   </div>
 </template>
@@ -18,29 +18,11 @@ export default {
   },
   data() {
     return {
-      list: [],
       button: {
         label: "/ AJOUTER UNE FACTURE",
         route: "factures/ajouter"
       }
     };
-  },
-  methods: {
-    //Fonction pour récupérer la liste des fournisseurs à partir de l'API (en utilisant Vue Resource)
-    listInvoices: async function() {
-      this.$http.get(`${rootURL}invoices/`).then(
-        response => {
-          this.list = response.body;
-        },
-        response => {
-          alert("erreur : ", response);
-        }
-      );
-    }
-  },
-  //Appel de la fonction à la création du composant.
-  created() {
-    this.listInvoices();
   }
 };
 </script>

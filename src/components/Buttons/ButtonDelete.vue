@@ -1,6 +1,6 @@
 <template>
   <div id="button-delete">
-    <button class="btn-lg btn-danger float-right">
+    <button class="btn-lg btn-danger">
       <font-awesome-icon icon="trash" />
     </button>
   </div>

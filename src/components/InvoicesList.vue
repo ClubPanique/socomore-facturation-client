@@ -20,9 +20,7 @@
             <ButtonEdit />
           </td>
           <td class="text-center align-middle">
-            <button class="btn-lg btn-danger float-right" @click="deleteInvoice(list[index].id)">
-              <font-awesome-icon icon="trash" />
-            </button>
+            <ButtonDelete @click="deleteInvoice(list[index].id)" />
           </td>
           <td class="text-center align-middle">
             <ButtonMore />
@@ -40,12 +38,12 @@ import ButtonMore from "../components/Buttons/ButtonMore";
 
 export default {
   name: "InvoicesList",
-<<<<<<< HEAD
-  props: ["list", "listInvoices"],
-=======
-  props: ["list"],
->>>>>>> 95359f41e5e984e05f05c5b4a0e16363155362ca
   components: { ButtonEdit, ButtonDelete, ButtonMore },
+  data() {
+    return {
+      list: []
+    };
+  },
   methods: {
     //Fonction pour transformer les dates de mySQL en javascript
     formatDate: function(date) {
@@ -57,11 +55,20 @@ export default {
       if (year) {
         if (day < 10 && month < 10) return `0${day}/0${month}/${year}`;
         else if (day < 10) return `0${day}/${month}/${year}`;
-        else if (day < 10) return `${day}/0${month}/${year}`;
+        else if (month < 10) return `${day}/0${month}/${year}`;
         return `${day}/${month}/${year}`;
-      } else {
-        return "La date n'a pas été renseignée";
       }
+    },
+    //Fonction pour récupérer la liste des fournisseurs à partir de l'API (en utilisant Vue Resource)
+    listInvoices: async function() {
+      this.$http.get(`${rootURL}invoices/`).then(
+        response => {
+          this.list = response.body;
+        },
+        response => {
+          alert("erreur : ", response);
+        }
+      );
     },
     deleteInvoice: async function(id) {
       let question = confirm("Voulez-vous supprimer cette facture ?");
@@ -69,6 +76,7 @@ export default {
         this.$http.delete(`${rootURL}invoices/${id}`).then(
           response => {
             alert("La facture a bien été supprimée !");
+            this.listInvoices();
           },
           response => {
             alert("erreur : ", response);
@@ -76,6 +84,10 @@ export default {
         );
       }
     }
+  },
+  //Appel de la fonction à la création du composant.
+  created() {
+    this.listInvoices();
   }
 };
 </script>
