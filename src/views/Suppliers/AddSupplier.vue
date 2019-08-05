@@ -134,6 +134,7 @@ export default {
   },
   methods: {
     addSupplier: async function() {
+      this.addSupplierData.phone = this.cleanPhone;
       const data = this.addSupplierData;
       this.$http.post(`${rootURL}suppliers/`, data).then(
         response => {
