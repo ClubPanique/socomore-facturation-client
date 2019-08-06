@@ -20,7 +20,7 @@
             <ButtonEdit />
           </td>
           <td class="text-center align-middle">
-            <ButtonDelete @click="deleteInvoice(list[index].id)" />
+            <ButtonDelete @clicked="deleteInvoice(list[index].id)" />
           </td>
           <td class="text-center align-middle">
             <ButtonMore />
