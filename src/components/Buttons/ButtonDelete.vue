@@ -11,7 +11,6 @@ export default {
   name: "ButtonDelete",
   methods: {
     isClicked() {
-      alert("Bouton cliqué");
       this.$emit("clicked");
     }
   }

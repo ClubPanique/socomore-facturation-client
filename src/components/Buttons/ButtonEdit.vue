@@ -1,6 +1,6 @@
 <template>
   <div id="button-edit">
-    <button class="btn-lg btn-primary" align="center" @click="$router.push(button)">
+    <button class="btn-lg btn-primary" align="center" @click="isClicked">
       <font-awesome-icon icon="edit" />
     </button>
   </div>
@@ -9,10 +9,9 @@
 <script>
 export default {
   name: "ButtonEdit",
-  props: {
-    button: {
-      type: String,
-      required: true
+  methods: {
+    isClicked() {
+      this.$emit("clicked");
     }
   }
 };
