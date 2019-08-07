@@ -1,6 +1,6 @@
 <template>
   <div id="supplier-details">
-    <h1>Informations sur le fournisseur n° {{$route.params.id}}</h1>
+    <h1 class="text-primary pb-3">Informations sur le fournisseur n° {{$route.params.id}}</h1>
     <div class="row">
       <div class="col pl-5">
         <h2>Informations sur l'entreprise</h2>
@@ -27,12 +27,16 @@
         <p>{{supplier.account}}</p>
       </div>
     </div>
+    <InvoicesList />
   </div>
 </template>
 
 <script>
+import InvoicesList from "../../components/InvoicesList";
+
 export default {
   name: "Details",
+  components: {InvoicesList},
   data() {
     return {
       supplier: [],

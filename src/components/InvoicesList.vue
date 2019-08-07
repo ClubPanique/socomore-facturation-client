@@ -17,18 +17,10 @@
           <td>{{list[index].price_notax}} €</td>
           <td>{{translateStatus(list[index].status)}}</td>
           <td class="text-center align-middle">
-            <button
-              class="btn-lg btn-primary"
-              align="center"
-              @click="$router.push(`factures/modifier/${list[index].id}`)"
-            >
-              <font-awesome-icon icon="edit" />
-            </button>
+            <ButtonEdit @click="$router.push(`factures/modifier/${list[index].id}`)" />
           </td>
           <td class="text-center align-middle">
-            <button class="btn-lg btn-danger" @click="deleteInvoice(list[index].id)">
-              <font-awesome-icon icon="trash" />
-            </button>
+            <ButtonDelete @clicked="deleteInvoice(list[index].id)" />
           </td>
           <td class="text-center align-middle">
             <ButtonMore />
