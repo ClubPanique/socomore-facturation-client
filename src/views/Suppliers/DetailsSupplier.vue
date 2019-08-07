@@ -27,7 +27,7 @@
         <p>{{supplier.account}}</p>
       </div>
     </div>
-    <InvoicesList />
+    <InvoicesList class="pt-5" />
   </div>
 </template>
 
@@ -36,11 +36,10 @@ import InvoicesList from "../../components/InvoicesList";
 
 export default {
   name: "Details",
-  components: {InvoicesList},
+  components: { InvoicesList },
   data() {
     return {
-      supplier: [],
-      invoices: []
+      supplier: []
     };
   },
   methods: {

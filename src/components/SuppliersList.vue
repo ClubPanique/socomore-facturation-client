@@ -19,26 +19,13 @@
           <td>{{list[index].city}}</td>
           <td>{{list[index].country}}</td>
           <td class="text-center align-middle">
-            <button
-              class="btn-lg btn-primary"
-              align="center"
-              @click="$router.push(`fournisseurs/modifier/${list[index].id}`)"
-            >
-              <font-awesome-icon icon="edit" />
-            </button>
+            <ButtonEdit @clicked="$router.push(`fournisseurs/modifier/${list[index].id}`)" />
           </td>
           <td class="text-center align-middle">
-            <button class="btn-lg btn-danger" @click="deleteSupplier(list[index].id)">
-              <font-awesome-icon icon="trash" />
-            </button>
+            <ButtonDelete @clicked="deleteSupplier(list[index].id)" />
           </td>
           <td class="text-center align-middle">
-            <button
-              class="btn-lg btn-secondary"
-              @click="$router.push(`fournisseurs/${list[index].id}`)"
-            >
-              <font-awesome-icon icon="plus" />
-            </button>
+            <ButtonMore @clicked="$router.push(`fournisseurs/${list[index].id}`)" />
           </td>
         </tr>
       </tbody>
@@ -49,10 +36,11 @@
 <script>
 import ButtonEdit from "../components/Buttons/ButtonEdit";
 import ButtonMore from "../components/Buttons/ButtonMore";
+import ButtonDelete from "../components/Buttons/ButtonDelete";
 
 export default {
   name: "SuppliersList",
-  components: { ButtonEdit, ButtonMore },
+  components: { ButtonEdit, ButtonDelete, ButtonMore },
   data() {
     return {
       list: [],
