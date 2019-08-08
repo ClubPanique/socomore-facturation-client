@@ -1,7 +1,7 @@
 <template>
   <div id="invoices-list">
     <div v-if="list.length > 0">
-      <table class="table">
+      <!-- <table class="table">
         <thead>
           <th scope="col">Date</th>
           <th scope="col">Fournisseur</th>
@@ -30,7 +30,8 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table>-->
+      <List :list="list" :types="types" :columns="columns" />
     </div>
     <div v-else-if="$route.params.id">
       <p>Il n'y a pas de facture associée à ce fournisseur</p>
@@ -42,16 +43,16 @@
 </template>
 
 <script>
-import ButtonEdit from "../components/Buttons/ButtonEdit";
-import ButtonDelete from "../components/Buttons/ButtonDelete";
-import ButtonMore from "../components/Buttons/ButtonMore";
+import List from "./List";
 
 export default {
   name: "InvoicesList",
-  components: { ButtonEdit, ButtonDelete, ButtonMore },
+  components: { List },
   data() {
     return {
-      list: []
+      list: [],
+      columns: ["Date", "Fournisseur", "Montant", "Statut"],
+      types: ["date", "supplier_id", "price_notax", "status"]
     };
   },
   methods: {
@@ -75,6 +76,7 @@ export default {
         });
       }
     },
+    //Fonction pour récupérer le nom du fournisseurs à partir du supplier_id.
     getSupplierName: async function(supplier_id) {
       return new Promise((resolve, reject) => {
         this.$http

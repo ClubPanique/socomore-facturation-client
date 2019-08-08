@@ -11,7 +11,11 @@
         <tr v-for="(item, index) in list" :key="index">
           <td v-for="(type, index) in types" :key="index">
             <div v-for="(element, name, index) in item" :key="index">
-              <div v-if="name == type">{{element}}</div>
+              <div v-if="name == type">
+                <div v-if="type == 'date'">{{formatDate(element)}}</div>
+                <div v-else-if="type == 'status'">{{translateStatus(element)}}</div>
+                <div v-else>{{element}}</div>
+              </div>
             </div>
           </td>
           <td class="text-center align-middle">
@@ -55,23 +59,44 @@ export default {
     return {
       newList: []
     };
-  }
-  /* methods: {
-    displayList: function(list) {
-      for (type in types) {
-        console.log(type);
-        for (item in list) {
-          if (item.key == type) {
-            newList.push(item);
-            console.log(item);
-          }
-        }
+  },
+  methods: {
+    formatDate: function(date) {
+      let dateFormat = date.slice(0, 10).replace(/[-]/g, "/");
+      let jsDate = new Date(Date.parse(dateFormat));
+      let year = jsDate.getFullYear();
+      let month = jsDate.getMonth();
+      let day = jsDate.getDate();
+      if (year) {
+        if (day < 10 && month < 10) return `0${day}/0${month}/${year}`;
+        else if (day < 10) return `0${day}/${month}/${year}`;
+        else if (month < 10) return `${day}/0${month}/${year}`;
+        return `${day}/${month}/${year}`;
       }
+    },
+    //Fonction pour traduire le statut inscrit en base en français.
+    translateStatus: function(status) {
+      switch (status) {
+        case "emitted":
+          status = "Emise";
+          break;
+        case "received":
+          status = "Reçue";
+          break;
+        case "reminder":
+          status = "Relance";
+          break;
+        case "payed":
+          status = "Payée";
+          break;
+        default:
+          status;
+      }
+      return status;
     }
   },
-  created() {
+  mounted() {
     console.log(this.list);
-    console.log(this.types);
-  } */
+  }
 };
 </script>
