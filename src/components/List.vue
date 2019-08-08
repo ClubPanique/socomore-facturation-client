@@ -19,13 +19,14 @@
             </div>
           </td>
           <td class="text-center align-middle">
-            <ButtonEdit @clicked="$router.push(`fournisseurs/modifier/${list[index].id}`)" />
+            <ButtonEdit @clicked="$router.push(`${path}/modifier/${list[index].id}`)" />
           </td>
           <td class="text-center align-middle">
-            <ButtonDelete @clicked="deleteSupplier(list[index].id)" />
+            <!-- <ButtonDelete @clicked="deleteSupplier(list[index].id)" /> -->
+            <ButtonDelete @clicked="onDelete(list[index].id)" />
           </td>
           <td class="text-center align-middle">
-            <ButtonMore @clicked="$router.push(`fournisseurs/${list[index].id}`)" />
+            <ButtonMore @clicked="$router.push(`${path}/${list[index].id}`)" />
           </td>
         </tr>
       </tbody>
@@ -53,6 +54,10 @@ export default {
     types: {
       type: Array,
       required: true
+    },
+    path: {
+      type: String,
+      required: true
     }
   },
   data() {
@@ -61,6 +66,9 @@ export default {
     };
   },
   methods: {
+    onDelete: function(id) {
+      this.$emit("delete", id);
+    },
     formatDate: function(date) {
       let dateFormat = date.slice(0, 10).replace(/[-]/g, "/");
       let jsDate = new Date(Date.parse(dateFormat));

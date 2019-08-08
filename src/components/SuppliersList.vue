@@ -1,7 +1,16 @@
 <template>
   <div id="suppliers-list">
     <div v-if="list.length > 0">
-      <List :columns="columns" :list="list" :types="types" />
+      <List
+        :columns="columns"
+        :list="list"
+        :types="types"
+        :path="path"
+        @delete="deleteSupplier($event)"
+      />
+    </div>
+    <div v-else>
+      <p>Il n'y a pas de fournisseur dans la base de données. Cliquez sur ajouter un fournisseur pour en ajouter :)</p>
     </div>
   </div>
 </template>
@@ -16,7 +25,8 @@ export default {
     return {
       list: [],
       columns: ["Entreprise", "Adresse", "Code Postal", "Ville", "Pays"],
-      types: ["company", "adress", "postcode", "city", "country"]
+      types: ["company", "adress", "postcode", "city", "country"],
+      path: "fournisseurs"
     };
   },
   methods: {
@@ -32,6 +42,7 @@ export default {
       );
     },
     deleteSupplier: async function(id) {
+      console.log(id);
       let question = confirm("Voulez-vous supprimer ce fournisseur ?");
       if (question == true) {
         this.$http.delete(`${rootURL}suppliers/${id}`).then(
@@ -49,6 +60,14 @@ export default {
   //Appel de la fonction à la création du composant.
   created() {
     this.listSuppliers();
+  },
+  updated() {
+    this.listSuppliers();
+  },
+  events: {
+    delete: function() {
+      this.listSuppliers();
+    }
   }
 };
 </script>
