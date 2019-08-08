@@ -140,7 +140,7 @@ export default {
           this.editSupplierData = response.body;
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     },
@@ -153,7 +153,7 @@ export default {
           alert("Le fournisseur a bien été modifiée");
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     }

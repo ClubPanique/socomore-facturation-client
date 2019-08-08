@@ -120,7 +120,7 @@ export default {
           this.editInvoiceData.date = dateFormat;
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     },
@@ -132,7 +132,7 @@ export default {
           alert("La facture a bien été modifiée");
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     }

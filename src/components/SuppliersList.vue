@@ -68,7 +68,7 @@ export default {
             this.listSuppliers();
           },
           response => {
-            alert("erreur : ", response);
+            alert("Erreur lors de la connexion à l'API", response);
           }
         );
       }

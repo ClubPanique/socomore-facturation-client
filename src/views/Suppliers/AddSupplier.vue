@@ -142,7 +142,7 @@ export default {
           this.$router.push("/fournisseurs");
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     }

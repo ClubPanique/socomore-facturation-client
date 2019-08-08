@@ -120,7 +120,7 @@ export default {
           alert("La facture a bien été ajoutée");
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     }

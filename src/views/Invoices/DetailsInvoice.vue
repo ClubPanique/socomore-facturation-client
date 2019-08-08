@@ -44,7 +44,7 @@ export default {
           console.log(this.invoice);
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
     },
