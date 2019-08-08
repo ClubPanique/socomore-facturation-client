@@ -149,7 +149,7 @@ export default {
       const data = this.editSupplierData;
       return this.$http.put(`${rootURL}suppliers/${id}`, data).then(
         response => {
-          this.$router.push("/fournisseurs");
+          this.$router.go(-1);
           alert("Le fournisseur a bien été modifiée");
         },
         response => {

@@ -67,14 +67,12 @@ export default {
         });
       } else {
         //Les factures d'un fournisseur si on est sur la page fournisseurs/:id
-        this.$http.get(`${rootURL}invoices/supplier/${id}`).then(
-          response => {
-            this.list = response.body;
-          },
-          response => {
-            alert("Erreur lors de la requête à l'API", response);
-          }
-        );
+        return new Promise((resolve, reject) => {
+          this.$http
+            .get(`${rootURL}invoices/supplier/${id}`)
+            .then(response => resolve(response))
+            .catch(err => reject(err));
+        });
       }
     },
     getSupplierName: async function(supplier_id) {

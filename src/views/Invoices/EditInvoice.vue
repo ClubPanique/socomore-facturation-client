@@ -128,7 +128,7 @@ export default {
       const data = this.editInvoiceData;
       return this.$http.put(`${rootURL}invoices/${id}`, data).then(
         response => {
-          this.$router.push("/factures");
+          this.$router.go(-1);
           alert("La facture a bien été modifiée");
         },
         response => {
