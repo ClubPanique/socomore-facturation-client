@@ -1,6 +1,6 @@
 <template>
   <div class="invoices">
-    <h1>Page factures</h1>
+    <h1 class="text-primary">Factures</h1>
     <InvoicesList />
     <ButtonAdd :button="button" />
   </div>
