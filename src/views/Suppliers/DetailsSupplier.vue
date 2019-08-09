@@ -28,7 +28,9 @@
         <p>{{supplier.account}}</p>
       </div>
     </div>
-
+    <router-link :to="`/factures/ajouter`" tag="span">
+      <button class="btn-lg btn-primary float-left text-white">/ AJOUTER UNE FACTURE</button>
+    </router-link>
     <router-link :to="`/fournisseurs/modifier/${supplier.id}`" tag="span">
       <button class="btn-lg btn-secondary float-right text-white">/ MODIFIER LE FOURNISSEUR</button>
     </router-link>
