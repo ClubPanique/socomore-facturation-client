@@ -77,7 +77,7 @@
             />
           </div>
           <div class="form-group">
-            <label for="status">Statut*</label>
+            <label for="status" id="status">Statut*</label>
             <select class="custom-select" v-model="addInvoiceData.status">
               <option selected>Sélectionnez le statut de la facture</option>
               <option value="emitted">Emise</option>

@@ -1,8 +1,8 @@
 <template>
   <div class="invoices">
+    <ButtonAdd :button="button" />
     <h1 class="text-primary">Factures</h1>
     <InvoicesList />
-    <ButtonAdd :button="button" />
   </div>
 </template>
 

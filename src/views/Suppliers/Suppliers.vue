@@ -1,8 +1,8 @@
 <template>
   <div class="suppliers">
+    <ButtonAdd :button="button" />
     <h1 class="text-primary mb-4">Fournisseurs</h1>
     <SuppliersList />
-    <ButtonAdd :button="button" />
   </div>
 </template>
 
