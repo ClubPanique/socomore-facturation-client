@@ -30,7 +30,7 @@
     </div>
 
     <router-link :to="`/fournisseurs/modifier/${supplier.id}`" tag="span">
-      <button class="btn-lg btn-secondary float-right text-light">/ MODIFIER LE FOURNISSEUR</button>
+      <button class="btn-lg btn-secondary float-right text-white">/ MODIFIER LE FOURNISSEUR</button>
     </router-link>
 
     <h1 class="text-primary mt-6">Factures associées au fournisseur</h1>

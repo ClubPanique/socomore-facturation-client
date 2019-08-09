@@ -1,43 +1,19 @@
 <template>
   <div class="home container">
-    <h2 class="text-center mb-5">Bienvenue sur l'outils de facturation de l'entreprise Socomore.</h2>
-
-    <div class="row align-items-center" style="height: 100px;">
+    <h2 class="text-center">Bienvenue !</h2>
+    <p class="text-center">Choisissez de consulter les fournisseurs ou les factures</p>
+    <div class="row align-items-center mb-6" style="height: 100px;">
       <div class="col-sm text-center m-1">
-        <button class="btn-lg btn-primary p-6 text-center h-100">
-          <router-link
-            to="/fournisseurs"
-            tag="span"
-            class="text-light font-weight-bold"
-          >/ FOURNISSEURS</router-link>
-        </button>
+        <router-link to="/fournisseurs" tag="span" class="text-white font-weight-bold">
+          <button class="btn-lg btn-primary p-6 text-center h-100">/ FOURNISSEURS</button>
+        </router-link>
       </div>
       <div class="col-sm text-center m-1">
-        <button class="btn-lg btn-secondary p-6 text-center h-100">
-          <router-link to="/factures" tag="span" class="text-light font-weight-bold">/ FACTURES</router-link>
-        </button>
+        <router-link to="/factures" tag="span" class="text-white font-weight-bold">
+          <button class="btn-lg btn-secondary p-6 text-center h-100">/ FACTURES</button>
+        </router-link>
       </div>
     </div>
-
-    <!-- <div class="row">
-      <div class="col align-self-center">
-        <p>D'ici, vous pouvez :</p>
-        <ul class="list-group list-group text-center w-75">
-          <li class="list-group-item">
-            <span class="font-weight-bold">Ajouter</span> des fournisseurs et des factures dans la base de données
-          </li>
-          <li class="list-group-item">
-            <span class="font-weight-bold">Consulter</span> les fournisseurs et les factures inscrits dans la base de données
-          </li>
-          <li class="list-group-item">
-            <span class="font-weight-bold">Modifier</span> les fournisseurs et les factures inscrits dans la base de données
-          </li>
-          <li class="list-group-item">
-            <span class="font-weight-bold">Supprimer</span> les fournisseurs et les factures inscrits dans la base de données
-          </li>
-        </ul>
-      </div>
-    </div>-->
   </div>
 </template>
 

@@ -27,10 +27,10 @@
       </div>
     </div>
     <router-link :to="`/factures/modifier/${invoice.id}`" tag="span">
-      <button class="btn-lg btn-secondary float-left text-light">/ MODIFIER LA FACTURE</button>
+      <button class="btn-lg btn-secondary float-left text-white">/ MODIFIER LA FACTURE</button>
     </router-link>
     <router-link :to="`/fournisseurs/${invoice.supplier_id}`" tag="span">
-      <button class="btn-lg btn-primary float-right text-light">/ VOIR LE FOURNISSEUR</button>
+      <button class="btn-lg btn-primary float-right text-white">/ VOIR LE FOURNISSEUR</button>
     </router-link>
   </div>
 </template>

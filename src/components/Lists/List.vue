@@ -26,7 +26,20 @@
             <div v-for="(element, name, index) in item" :key="index">
               <div v-if="name == type">
                 <div v-if="type == 'date'">{{formatDate(element)}}</div>
-                <div v-else-if="type == 'status'">{{translateStatus(element)}}</div>
+                <div v-else-if="type == 'status'">
+                  <div v-if="element == 'emitted'">
+                    <div class="text-primary">{{translateStatus(element)}}</div>
+                  </div>
+                  <div v-else-if="element == 'received'">
+                    <div class="text-secondary">{{translateStatus(element)}}</div>
+                  </div>
+                  <div v-else-if="element == 'payed'">
+                    <div class="text-success">{{translateStatus(element)}}</div>
+                  </div>
+                  <div v-else-if="element == 'reminder'">
+                    <div class="text-danger">{{translateStatus(element)}}</div>
+                  </div>
+                </div>
                 <div v-else>{{element}}</div>
               </div>
             </div>

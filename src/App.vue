@@ -4,15 +4,26 @@
     <div class="container">
       <router-view />
     </div>
+    <!-- Condition pour afficher le footer en bas de la page seulement sur la home page -->
+    <div v-if="this.$route.path == '/'">
+      <AppFooter class="mt-3" style="position: absolute; bottom: 0; width: 100%;" />
+    </div>
+    <div v-else>
+      <AppFooter />
+    </div>
   </div>
 </template>
 
 <script>
 import AppHeader from "./components/AppHeader";
+import AppFooter from "./components/AppFooter";
 
 export default {
   name: "app",
-  components: { AppHeader }
+  components: { AppHeader, AppFooter },
+  created() {
+    console.log(this.$route.path);
+  }
 };
 </script>
 
