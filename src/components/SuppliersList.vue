@@ -60,6 +60,14 @@ export default {
   //Appel de la fonction à la création du composant.
   created() {
     this.listSuppliers();
+<<<<<<< HEAD
+=======
+  },
+  events: {
+    delete: function() {
+      this.listSuppliers();
+    }
+>>>>>>> filters
   }
 };
 </script>
