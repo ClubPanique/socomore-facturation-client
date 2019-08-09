@@ -1,5 +1,15 @@
 <template>
   <div id="list">
+    <div v-if="list[0].status" class="form-group col-6 float-right mb-2">
+      <label for="status">Filtrez selon le statut de la facture</label>
+      <select class="custom-select" id="status" v-model="search">
+        <option value>Pas de filtre</option>
+        <option value="emitted">Emise</option>
+        <option value="received">Reçue</option>
+        <option value="reminder">Relance</option>
+        <option value="payed">Payée</option>
+      </select>
+    </div>
     <table class="table">
       <thead>
         <th v-for="(column, index) in columns" :key="index">{{column}}</th>
@@ -8,7 +18,7 @@
         <th scope="col" class="text-center align-middle">Voir plus</th>
       </thead>
       <tbody>
-        <tr v-for="(item, index) in list" :key="index">
+        <tr v-for="(item, index) in filteredList" :key="index">
           <td v-for="(type, index) in types" :key="index">
             <div v-for="(element, name, index) in item" :key="index">
               <div v-if="name == type">
@@ -62,7 +72,7 @@ export default {
   },
   data() {
     return {
-      newList: []
+      search: ""
     };
   },
   methods: {
@@ -103,7 +113,18 @@ export default {
       return status;
     }
   },
-  mounted() {
+  computed: {
+    filteredList: function() {
+      return this.list.filter(item => {
+        if (item.status) {
+          return item.status.match(this.search);
+        } else {
+          return item;
+        }
+      });
+    }
+  },
+  created() {
     console.log(this.list);
   }
 };

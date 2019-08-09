@@ -61,9 +61,6 @@ export default {
   created() {
     this.listSuppliers();
   },
-  updated() {
-    this.listSuppliers();
-  },
   events: {
     delete: function() {
       this.listSuppliers();
