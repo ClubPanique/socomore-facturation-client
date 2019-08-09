@@ -12,7 +12,8 @@
 </template>
 
 <script>
-import InvoiceForm from "../../components/InvoiceForm";
+import InvoiceForm from "../../components/Forms/InvoiceForm";
+
 export default {
   name: "EditInvoice",
   components: { InvoiceForm },

@@ -28,20 +28,22 @@
         <p>{{supplier.account}}</p>
       </div>
     </div>
+
     <router-link :to="`/fournisseurs/modifier/${supplier.id}`" tag="span">
-      <button class="btn-lg btn-secondary float-right text-light mt-n6">/ MODIFIER LE FOURNISSEUR</button>
+      <button class="btn-lg btn-secondary float-right text-light">/ MODIFIER LE FOURNISSEUR</button>
     </router-link>
-    <h1 class="text-primary mt-2">Factures associées au fournisseur</h1>
+
+    <h1 class="text-primary mt-6">Factures associées au fournisseur</h1>
     <InvoicesList class="pt-2" />
   </div>
 </template>
 
 <script>
-import InvoicesList from "../../components/InvoicesList";
+import InvoicesList from "../../components/Lists/InvoicesList";
 import ButtonBack from "../../components/Buttons/ButtonBack";
 
 export default {
-  name: "Details",
+  name: "DetailsSupplier",
   components: { InvoicesList, ButtonBack },
   data() {
     return {

@@ -1,5 +1,5 @@
 <template>
-  <div id="invoice-add">
+  <div id="invoice-form">
     <form @submit.prevent="onSubmit">
       <div class="row">
         <div class="col-sm">
@@ -103,7 +103,7 @@
 import ButtonBack from "./Buttons/ButtonBack";
 
 export default {
-  name: "AddForm",
+  name: "InvoiceForm",
   components: { ButtonBack },
   props: {
     data: {

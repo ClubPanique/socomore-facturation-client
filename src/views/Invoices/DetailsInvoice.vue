@@ -39,7 +39,7 @@
 import ButtonBack from "../../components/Buttons/ButtonBack";
 
 export default {
-  name: "Details",
+  name: "DetailsInvoice",
   components: { ButtonBack },
   data() {
     return {

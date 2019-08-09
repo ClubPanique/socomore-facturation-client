@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import InvoicesList from "../../components/InvoicesList";
+import InvoicesList from "../../components/Lists/InvoicesList";
 import ButtonAdd from "../../components/Buttons/ButtonAdd";
 
 export default {

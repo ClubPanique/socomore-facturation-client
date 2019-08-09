@@ -74,8 +74,7 @@ export default {
   },
   data() {
     return {
-      search: "",
-      loading: true
+      search: ""
     };
   },
   methods: {
@@ -86,7 +85,7 @@ export default {
       let dateFormat = date.slice(0, 10).replace(/[-]/g, "/");
       let jsDate = new Date(Date.parse(dateFormat));
       let year = jsDate.getFullYear();
-      //J'ajout 1 au mois car je ne sais pas pourquoi, il y a un décalage oO
+      //J'ajoute 1 au mois car je ne sais pas pourquoi, il y a un décalage oO
       let month = jsDate.getMonth() + 1;
       let day = jsDate.getDate();
       if (year) {

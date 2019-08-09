@@ -12,10 +12,10 @@
 </template>
 
 <script>
-import InvoiceForm from "../../components/InvoiceForm";
+import InvoiceForm from "../../components/Forms/InvoiceForm";
 
 export default {
-  name: "InvoiceInvoice",
+  name: "AddInvoice",
   components: { InvoiceForm },
   data() {
     return {
