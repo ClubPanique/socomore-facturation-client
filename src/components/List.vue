@@ -113,6 +113,9 @@ export default {
       return status;
     }
   },
+  mounted() {
+    console.log(this.$route.params.id);
+  },
   computed: {
     filteredList: function() {
       return this.list.filter(item => {
