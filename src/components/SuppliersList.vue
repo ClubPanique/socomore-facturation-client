@@ -1,16 +1,19 @@
 <template>
   <div id="suppliers-list">
-    <div v-if="list.length > 0">
-      <List
-        :columns="columns"
-        :list="list"
-        :types="types"
-        :path="path"
-        @delete="deleteSupplier($event)"
-      />
-    </div>
-    <div v-else>
-      <p>Il n'y a pas de fournisseur dans la base de données. Cliquez sur ajouter un fournisseur pour en ajouter :)</p>
+    <div v-if="loading == true">Chargement...</div>
+    <div v-if="loading == false">
+      <div v-if="list.length > 0">
+        <List
+          :columns="columns"
+          :list="list"
+          :types="types"
+          :path="path"
+          @delete="deleteSupplier($event)"
+        />
+      </div>
+      <div v-else>
+        <p>Il n'y a pas de fournisseur dans la base de données. Cliquez sur ajouter un fournisseur pour en ajouter :)</p>
+      </div>
     </div>
   </div>
 </template>
@@ -26,7 +29,8 @@ export default {
       list: [],
       columns: ["Entreprise", "Adresse", "Code Postal", "Ville", "Pays"],
       types: ["company", "adress", "postcode", "city", "country"],
-      path: "fournisseurs"
+      path: "fournisseurs",
+      loading: true
     };
   },
   methods: {
@@ -35,6 +39,7 @@ export default {
       this.$http.get(`${rootURL}suppliers/`).then(
         response => {
           this.list = response.body;
+          this.loading = false;
         },
         error => {
           return error;
