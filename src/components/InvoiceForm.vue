@@ -1,6 +1,5 @@
 <template>
   <div id="invoice-add">
-    <h1 class="text-primary">Nouvelle facture</h1>
     <form @submit.prevent="onSubmit">
       <div class="row">
         <div class="col-sm">
@@ -93,7 +92,7 @@
         </div>
       </div>
       <div class="row float-right">
-        <button type="sumbit" class="btn-lg btn-primary">/ AJOUTER LA FACTURE</button>
+        <button type="sumbit" class="btn-lg btn-primary">/ {{action}} LA FACTURE</button>
       </div>
     </form>
   </div>
@@ -109,6 +108,10 @@ export default {
     },
     suppliers: {
       type: Array,
+      required: true
+    },
+    action: {
+      type: String,
       required: true
     }
   },

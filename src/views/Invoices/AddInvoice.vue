@@ -1,8 +1,10 @@
 <template>
   <div id="invoice-add">
+    <h1 class="text-primary">Nouvelle facture</h1>
     <InvoiceForm
       :data="addInvoiceData"
       :suppliers="suppliers"
+      :action="action"
       v-model="addInvoiceData"
       @formSubmit="addInvoice()"
     />
@@ -26,7 +28,8 @@ export default {
         tax: "",
         status: "",
         supplier_id: ""
-      }
+      },
+      action: "AJOUTER"
     };
   },
   methods: {
