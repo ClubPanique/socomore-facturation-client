@@ -1,6 +1,6 @@
 <template>
   <div id="invoice-add">
-    <h1>Nouvelle facture</h1>
+    <h1 class="text-primary">Nouvelle facture</h1>
     <form @submit.prevent="addInvoice">
       <div class="row">
         <div class="col-sm">
@@ -20,6 +20,10 @@
                 :value="supplier.id"
               >{{supplier.company}}</option>
             </select>
+            <small id="supplierHelp" class="form-text text-muted">
+              Si le fournisseur associé à la facture n'est pas encore dans la base de données, veuillez l'entrer d'abord en
+              <router-link to="/fournisseurs/ajouter">cliquant ici</router-link>.
+            </small>
           </div>
           <div class="form-group">
             <label for="invoice_num">Numéro de facture*</label>
@@ -84,7 +88,7 @@
           <div class="form-group">
             <label for="status" id="status">Statut*</label>
             <select class="custom-select" v-model="addInvoiceData.status">
-              <option selected>Sélectionnez le statut de la facture</option>
+              <option disabled selected>Sélectionnez le statut de la facture</option>
               <option value="emitted">Emise</option>
               <option value="received">Reçue</option>
               <option value="reminder">Relance</option>
@@ -134,7 +138,6 @@ export default {
       this.$http.get(`${rootURL}suppliers/`).then(
         response => {
           this.suppliers = response.body;
-          console.log(this.suppliers);
         },
         error => {
           return error;
