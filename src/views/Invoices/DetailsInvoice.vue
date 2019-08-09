@@ -5,7 +5,7 @@
       <div class="col pl-5">
         <h2>Informations sur la facture</h2>
         <h3>Nom du fournisseur</h3>
-        <p>{{invoice.supplier_id}}</p>
+        <p>{{invoice.company}}</p>
         <h3>Numéro de facture</h3>
         <p>{{invoice.invoice_num}}</p>
         <h3>Date</h3>

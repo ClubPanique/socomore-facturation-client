@@ -100,6 +100,7 @@ export default {
   name: "AddInvoice",
   data() {
     return {
+      supplier: [],
       addInvoiceData: {
         invoice_num: "",
         date: "",
@@ -121,6 +122,19 @@ export default {
         },
         response => {
           alert("Erreur lors de la connexion à l'API", response);
+        }
+      );
+    },
+    getSuppliers: async function() {
+      this.$http.get(`${rootURL}suppliers/`).then(
+        response => {
+          this.supplier = {
+            id: response.body.id,
+            company: response.body.company
+          };
+        },
+        error => {
+          return error;
         }
       );
     }

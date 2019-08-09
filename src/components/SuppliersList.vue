@@ -60,14 +60,6 @@ export default {
   //Appel de la fonction à la création du composant.
   created() {
     this.listSuppliers();
-  },
-  updated() {
-    this.listSuppliers();
-  },
-  events: {
-    delete: function() {
-      this.listSuppliers();
-    }
   }
 };
 </script>

@@ -28,7 +28,7 @@ export default {
     return {
       list: [],
       columns: ["Date", "Fournisseur", "Montant", "Statut"],
-      types: ["date", "supplier_id", "price_notax", "status"],
+      types: ["date", "company", "price_notax", "status"],
       path: "factures"
     };
   },
@@ -37,30 +37,26 @@ export default {
     listInvoices: async function(id) {
       if (this.$route.params.id == null) {
         //Toutes les factures si on est sur la page /factures:
-        return new Promise((resolve, reject) => {
-          this.$http
-            .get(`${rootURL}invoices/`)
-            .then(response => resolve(response))
-            .catch(err => reject(err));
-        });
+        this.$http.get(`${rootURL}invoices/`).then(
+          response => {
+            this.list = response.body;
+          },
+          response => {
+            alert("Problème lors de la requête à l'API", response);
+          }
+        );
       } else {
         //Les factures d'un fournisseur si on est sur la page fournisseurs/:id
-        return new Promise((resolve, reject) => {
-          this.$http
-            .get(`${rootURL}invoices/supplier/${id}`)
-            .then(response => resolve(response))
-            .catch(err => reject(err));
-        });
+        this.$http.get(`${rootURL}invoices/supplier/${id}`).then(
+          response => {
+            console.log(response);
+            this.list = response.body;
+          },
+          response => {
+            alert("Problème lors de la requête à l'API", response);
+          }
+        );
       }
-    },
-    //Fonction pour récupérer le nom du fournisseurs à partir du supplier_id.
-    getSupplierName: async function(supplier_id) {
-      return new Promise((resolve, reject) => {
-        this.$http
-          .get(`${rootURL}suppliers/${supplier_id}`)
-          .then(response => resolve(response))
-          .catch(err => reject(err));
-      });
     },
     //Fonction pour supprimer une facture, selon son id.
     deleteInvoice: async function(id) {
@@ -80,16 +76,7 @@ export default {
   },
   //Appel de la fonction à la création du composant, en lui passant l'id via $route.
   created() {
-    this.listInvoices(this.$route.params.id).then(response => {
-      //Récupération des infos sur la facture
-      this.list = response.body;
-      //Boucle pour récupérer le nom des fournisseurs correspondant aux supplier_id
-      for (let invoice of this.list) {
-        this.getSupplierName(invoice.supplier_id).then(response => {
-          invoice.supplier_id = response.body.company;
-        });
-      }
-    });
+    this.listInvoices(this.$route.params.id);
   }
 };
 </script>
