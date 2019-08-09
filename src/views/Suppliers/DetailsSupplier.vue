@@ -28,7 +28,10 @@
         <p>{{supplier.account}}</p>
       </div>
     </div>
-    <h1 class="text-primary">Factures associées au fournisseur</h1>
+    <router-link :to="`/fournisseurs/modifier/${supplier.id}`" tag="span">
+      <button class="btn-lg btn-secondary float-right text-light mt-n6">/ MODIFIER LE FOURNISSEUR</button>
+    </router-link>
+    <h1 class="text-primary mt-2">Factures associées au fournisseur</h1>
     <InvoicesList class="pt-2" />
   </div>
 </template>

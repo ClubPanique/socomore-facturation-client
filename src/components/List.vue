@@ -18,6 +18,9 @@
         <th scope="col" class="text-center align-middle">Voir plus</th>
       </thead>
       <tbody>
+        <tr v-if="!filteredList.length">
+          <td>Pas de résultat pour ce filtre</td>
+        </tr>
         <tr v-for="(item, index) in filteredList" :key="index">
           <td v-for="(type, index) in types" :key="index">
             <div v-for="(element, name, index) in item" :key="index">
@@ -71,7 +74,8 @@ export default {
   },
   data() {
     return {
-      search: ""
+      search: "",
+      loading: true
     };
   },
   methods: {
