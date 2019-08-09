@@ -1,35 +1,43 @@
 <template>
   <div id="invoices-list">
-    <div v-if="list.length > 0">
-      <List
-        :list="list"
-        :types="types"
-        :columns="columns"
-        :path="path"
-        @delete="deleteInvoice($event)"
-      />
+    <div v-if="loading == true">
+      <pulse-loader class="pt-6" :loading="loading" :color="color"></pulse-loader>
     </div>
-    <div v-else-if="$route.params.id">
-      <p>Il n'y a pas de facture associée à ce fournisseur</p>
-    </div>
-    <div v-else>
-      <p>Il n'y a pas de facture dans la base de données. Cliquez sur ajouter une facture pour en ajouter :)</p>
+    <div v-if="loading == false">
+      <div v-if="list.length > 0">
+        <List
+          :list="list"
+          :types="types"
+          :columns="columns"
+          :path="path"
+          @delete="deleteInvoice($event)"
+        />
+      </div>
+      <div v-else-if="$route.params.id">
+        <p>Il n'y a pas de facture associée à ce fournisseur</p>
+      </div>
+      <div v-else>
+        <p>Il n'y a pas de facture dans la base de données. Cliquez sur ajouter une facture pour en ajouter :)</p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 import List from "./List";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   name: "InvoicesList",
-  components: { List },
+  components: { List, PulseLoader },
   data() {
     return {
       list: [],
       columns: ["Date", "Fournisseur", "Montant", "Statut"],
       types: ["date", "company", "price_notax", "status"],
-      path: "factures"
+      path: "factures",
+      loading: true,
+      color: "#e85e0e"
     };
   },
   methods: {
@@ -40,6 +48,7 @@ export default {
         this.$http.get(`${rootURL}invoices/`).then(
           response => {
             this.list = response.body;
+            this.loading = false;
           },
           response => {
             alert("Problème lors de la requête à l'API", response);
@@ -50,6 +59,7 @@ export default {
         this.$http.get(`${rootURL}invoices/supplier/${id}`).then(
           response => {
             this.list = response.body;
+            this.loading = false;
           },
           response => {
             alert("Problème lors de la requête à l'API", response);

@@ -1,6 +1,8 @@
 <template>
   <div id="suppliers-list">
-    <div v-if="loading == true">Chargement...</div>
+    <div v-if="loading == true">
+      <pulse-loader class="pt-6" :loading="loading" :color="color"></pulse-loader>
+    </div>
     <div v-if="loading == false">
       <div v-if="list.length > 0">
         <List
@@ -20,17 +22,20 @@
 
 <script>
 import List from "./List";
+import PulseLoader from "vue-spinner/src/PulseLoader.vue";
 
 export default {
   name: "SuppliersList",
-  components: { List },
+  components: { List, PulseLoader },
   data() {
     return {
       list: [],
       columns: ["Entreprise", "Adresse", "Code Postal", "Ville", "Pays"],
       types: ["company", "adress", "postcode", "city", "country"],
       path: "fournisseurs",
-      loading: true
+      //Pour vue-spinner
+      loading: true,
+      color: "#e85e0e"
     };
   },
   methods: {
