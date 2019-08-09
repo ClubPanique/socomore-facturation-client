@@ -1,6 +1,11 @@
 <template>
   <div id="invoice-add">
-    <InvoiceForm />
+    <InvoiceForm
+      :data="addInvoiceData"
+      :suppliers="suppliers"
+      v-model="addInvoiceData"
+      @formSubmit="addInvoice()"
+    />
   </div>
 </template>
 
@@ -9,6 +14,47 @@ import InvoiceForm from "../../components/InvoiceForm";
 
 export default {
   name: "InvoiceInvoice",
-  components: { InvoiceForm }
+  components: { InvoiceForm },
+  data() {
+    return {
+      suppliers: [],
+      addInvoiceData: {
+        invoice_num: "",
+        date: "",
+        command_num: "",
+        price_notax: "",
+        tax: "",
+        status: "",
+        supplier_id: ""
+      }
+    };
+  },
+  methods: {
+    addInvoice: async function() {
+      const data = this.addInvoiceData;
+      this.$http.post(`${rootURL}invoices/`, data).then(
+        response => {
+          this.$router.push("/factures");
+          alert("La facture a bien été ajoutée");
+        },
+        response => {
+          alert("Erreur lors de la connexion à l'API", response);
+        }
+      );
+    },
+    getSuppliers: async function() {
+      this.$http.get(`${rootURL}suppliers/`).then(
+        response => {
+          this.suppliers = response.body;
+        },
+        error => {
+          return error;
+        }
+      );
+    }
+  },
+  created() {
+    this.getSuppliers();
+  }
 };
 </script>

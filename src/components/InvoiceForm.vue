@@ -1,18 +1,13 @@
 <template>
   <div id="invoice-add">
     <h1 class="text-primary">Nouvelle facture</h1>
-    <form @submit.prevent="addInvoice">
+    <form @submit.prevent="onSubmit">
       <div class="row">
         <div class="col-sm">
           <h2>Informations sur la facture</h2>
           <div class="form-group">
             <label for="supplier">Fournisseur*</label>
-            <select
-              id="supplier"
-              class="custom-select"
-              v-model="addInvoiceData.supplier_id"
-              required
-            >
+            <select id="supplier" class="custom-select" v-model="data.supplier_id" required>
               <option disabled selected>Selectionnez un fournisseur</option>
               <option
                 v-for="(supplier, index) in suppliers"
@@ -32,7 +27,7 @@
               id="invoice_num"
               class="form-control"
               placeholder="Entrez le numéro de la facture"
-              v-model="addInvoiceData.invoice_num"
+              v-model="data.invoice_num"
               required
             />
           </div>
@@ -43,7 +38,7 @@
               id="date"
               class="form-control"
               placeholder="Entrez la date de la facture"
-              v-model="addInvoiceData.date"
+              v-model="data.date"
               required
             />
           </div>
@@ -54,7 +49,7 @@
               id="command_num"
               class="form-control"
               placeholder="Entrez le numéro de commande"
-              v-model="addInvoiceData.command_num"
+              v-model="data.command_num"
               required
             />
           </div>
@@ -69,7 +64,7 @@
               id="price_notax"
               class="form-control"
               placeholder="Entrez le prix HT de la facture"
-              v-model="addInvoiceData.price_notax"
+              v-model="data.price_notax"
               required
             />
           </div>
@@ -81,13 +76,13 @@
               id="tax"
               class="form-control"
               placeholder="Entrez le taux de taxe de la facture"
-              v-model="addInvoiceData.tax"
+              v-model="data.tax"
               required
             />
           </div>
           <div class="form-group">
             <label for="status" id="status">Statut*</label>
-            <select class="custom-select" v-model="addInvoiceData.status">
+            <select class="custom-select" v-model="data.status">
               <option disabled selected>Sélectionnez le statut de la facture</option>
               <option value="emitted">Emise</option>
               <option value="received">Reçue</option>
@@ -107,46 +102,20 @@
 <script>
 export default {
   name: "AddForm",
-  data() {
-    return {
-      suppliers: [],
-      addInvoiceData: {
-        invoice_num: "",
-        date: "",
-        command_num: "",
-        price_notax: "",
-        tax: "",
-        status: "",
-        supplier_id: ""
-      }
-    };
-  },
-  methods: {
-    addInvoice: async function() {
-      const data = this.addInvoiceData;
-      this.$http.post(`${rootURL}invoices/`, data).then(
-        response => {
-          this.$router.push("/factures");
-          alert("La facture a bien été ajoutée");
-        },
-        response => {
-          alert("Erreur lors de la connexion à l'API", response);
-        }
-      );
+  props: {
+    data: {
+      type: Object,
+      required: true
     },
-    getSuppliers: async function() {
-      this.$http.get(`${rootURL}suppliers/`).then(
-        response => {
-          this.suppliers = response.body;
-        },
-        error => {
-          return error;
-        }
-      );
+    suppliers: {
+      type: Array,
+      required: true
     }
   },
-  created() {
-    this.getSuppliers();
+  methods: {
+    onSubmit: function() {
+      this.$emit("formSubmit");
+    }
   }
 };
 </script>
