@@ -12,7 +12,7 @@
     </div>
     <table class="table">
       <thead>
-        <th v-for="(column, index) in columns" :key="index">{{column}}</th>
+        <th v-for="(column, index) in columns" :key="index" class="align-middle">{{column}}</th>
         <th scope="col" class="text-center align-middle">Modifier</th>
         <th scope="col" class="text-center align-middle">Supprimer</th>
         <th scope="col" class="text-center align-middle">Voir plus</th>
@@ -22,7 +22,7 @@
           <td>Pas de résultat pour ce filtre</td>
         </tr>
         <tr v-for="(item, index) in filteredList" :key="index">
-          <td v-for="(type, index) in types" :key="index">
+          <td v-for="(type, index) in types" :key="index" class="align-middle">
             <div v-for="(element, name, index) in item" :key="index">
               <div v-if="name == type">
                 <div v-if="type == 'date'">{{formatDate(element)}}</div>
@@ -47,9 +47,9 @@
 </template>
 
 <script>
-import ButtonEdit from "../components/Buttons/ButtonEdit";
-import ButtonMore from "../components/Buttons/ButtonMore";
-import ButtonDelete from "../components/Buttons/ButtonDelete";
+import ButtonEdit from "../Buttons/ButtonEdit";
+import ButtonMore from "../Buttons/ButtonMore";
+import ButtonDelete from "../Buttons/ButtonDelete";
 
 export default {
   name: "List",

@@ -105,8 +105,8 @@
           </div>
         </div>
       </div>
-      <ButtonBack class="float-left" />
-      <div class="row float-right">
+      <ButtonBack class="float-left m-1" />
+      <div class="row float-right m-1">
         <button type="sumbit" class="btn-lg btn-primary">/ {{action}} LE FOURNISSEUR</button>
       </div>
     </form>
@@ -114,7 +114,7 @@
 </template>
 
 <script>
-import ButtonBack from "./Buttons/ButtonBack";
+import ButtonBack from "../Buttons/ButtonBack";
 
 export default {
   name: "SupplierForm",
