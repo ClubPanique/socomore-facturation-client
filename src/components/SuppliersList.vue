@@ -1,57 +1,32 @@
 <template>
   <div id="suppliers-list">
-    <table class="table">
-      <thead>
-        <th scope="col">Entreprise</th>
-        <th scope="col">Adresse</th>
-        <th scope="col">Code Postal</th>
-        <th scope="col">Ville</th>
-        <th scope="col">Pays</th>
-        <th scope="col" class="text-center align-middle">Modifier</th>
-        <th scope="col" class="text-center align-middle">Supprimer</th>
-        <th scope="col" class="text-center align-middle">Voir plus</th>
-      </thead>
-      <tbody>
-        <tr v-for="(item, index) in list" :key="index">
-          <td>{{list[index].company}}</td>
-          <td>{{list[index].adress}}</td>
-          <td>{{list[index].postcode}}</td>
-          <td>{{list[index].city}}</td>
-          <td>{{list[index].country}}</td>
-          <td class="text-center align-middle">
-            <button
-              class="btn-lg btn-primary"
-              align="center"
-              @click="$router.push(`fournisseurs/modifier/${list[index].id}`)"
-            >
-              <font-awesome-icon icon="edit" />
-            </button>
-          </td>
-          <td class="text-center align-middle">
-            <button class="btn-lg btn-danger" @click="deleteSupplier(list[index].id)">
-              <font-awesome-icon icon="trash" />
-            </button>
-          </td>
-          <td class="text-center align-middle">
-            <ButtonMore />
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div v-if="list.length > 0">
+      <List
+        :columns="columns"
+        :list="list"
+        :types="types"
+        :path="path"
+        @delete="deleteSupplier($event)"
+      />
+    </div>
+    <div v-else>
+      <p>Il n'y a pas de fournisseur dans la base de données. Cliquez sur ajouter un fournisseur pour en ajouter :)</p>
+    </div>
   </div>
 </template>
 
 <script>
-import ButtonEdit from "../components/Buttons/ButtonEdit";
-import ButtonMore from "../components/Buttons/ButtonMore";
+import List from "./List";
 
 export default {
   name: "SuppliersList",
-  components: { ButtonEdit, ButtonMore },
+  components: { List },
   data() {
     return {
       list: [],
-      button: ""
+      columns: ["Entreprise", "Adresse", "Code Postal", "Ville", "Pays"],
+      types: ["company", "adress", "postcode", "city", "country"],
+      path: "fournisseurs"
     };
   },
   methods: {
@@ -67,6 +42,7 @@ export default {
       );
     },
     deleteSupplier: async function(id) {
+      console.log(id);
       let question = confirm("Voulez-vous supprimer ce fournisseur ?");
       if (question == true) {
         this.$http.delete(`${rootURL}suppliers/${id}`).then(
@@ -75,7 +51,7 @@ export default {
             this.listSuppliers();
           },
           response => {
-            alert("erreur : ", response);
+            alert("Erreur lors de la connexion à l'API", response);
           }
         );
       }
@@ -84,6 +60,11 @@ export default {
   //Appel de la fonction à la création du composant.
   created() {
     this.listSuppliers();
+  },
+  events: {
+    delete: function() {
+      this.listSuppliers();
+    }
   }
 };
 </script>

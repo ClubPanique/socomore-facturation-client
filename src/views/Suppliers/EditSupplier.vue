@@ -1,95 +1,113 @@
 <template>
-  <div id="invoice-add">
-    <h1>Nouvelle facture</h1>
-    <form @submit.prevent="addInvoice">
+  <div id="supplier-edit">
+    <h1>Modifier le fournisseur n° {{$route.params.id}}</h1>
+    <form @submit.prevent="editSupplier($route.params.id)">
       <div class="row">
         <div class="col-sm">
-          <h2>Informations sur la facture</h2>
+          <h2>Informations sur l'entreprise</h2>
           <div class="form-group">
-            <label for="supplier">Fournisseur*</label>
+            <label for="company">Entreprise*</label>
             <input
               type="text"
-              id="supplier"
+              id="company"
               class="form-control"
-              placeholder="Entrez le nom du fournisseur"
-              v-model="addInvoiceData.supplier_id"
+              placeholder="Entrez le nom de l'entreprise"
+              v-model.trim="editSupplierData.company"
               required
             />
           </div>
           <div class="form-group">
-            <label for="invoice_num">Numéro de facture*</label>
+            <label for="adress">Adresse*</label>
             <input
               type="text"
-              id="invoice_num"
+              id="adress"
               class="form-control"
-              placeholder="Entrez le numéro de la facture"
-              v-model="addInvoiceData.invoice_num"
+              placeholder="Entrez l'adresse de l'entreprise"
+              v-model.trim="editSupplierData.adress"
               required
             />
           </div>
           <div class="form-group">
-            <label for="date">Date*</label>
+            <label for="postcode">Code postal*</label>
             <input
-              type="date"
-              id="date"
+              type="text"
+              id="postcode"
               class="form-control"
-              placeholder="Entrez la date de la facture"
-              v-model="addInvoiceData.date"
+              placeholder="Entrez le code postal de l'entreprise"
+              v-model.trim="editSupplierData.postcode"
               required
             />
           </div>
           <div class="form-group">
-            <label for="command_num">Numéro de commande*</label>
+            <label for="city">Ville*</label>
             <input
               type="text"
-              id="command_num"
+              id="city"
               class="form-control"
-              placeholder="Entrez le numéro de commande"
-              v-model="addInvoiceData.command_num"
+              placeholder="Entrez la ville de l'entreprise"
+              v-model.trim="editSupplierData.city"
               required
+            />
+          </div>
+          <div class="form-group">
+            <label for="country">Pays*</label>
+            <input
+              type="text"
+              id="country"
+              class="form-control"
+              placeholder="Entrez le pays de l'entreprise"
+              v-model.trim="editSupplierData.country"
+              required
+            />
+          </div>
+          <div class="form-group">
+            <label for="phone">Téléphone</label>
+            <input
+              type="text"
+              id="phone"
+              class="form-control"
+              placeholder="Entrez le n° de téléphone de l'entreprise"
+              v-model.trim="editSupplierData.phone"
             />
           </div>
         </div>
         <div class="col-sm">
-          <h2>Informations sur le montant</h2>
+          <h2>Informations de paiement</h2>
           <div class="form-group">
-            <label for="price_notax">Prix HT*</label>
+            <label for="iban">IBAN*</label>
             <input
-              type="number"
-              step="0.01"
-              id="price_notax"
+              type="text"
+              id="iban"
               class="form-control"
-              placeholder="Entrez le prix HT de la facture"
-              v-model="addInvoiceData.price_notax"
+              placeholder="Entrez l'IBAN de l'entreprise"
+              v-model.trim="editSupplierData.iban"
               required
             />
           </div>
           <div class="form-group">
-            <label for="tax">Taxe*</label>
+            <label for="swift-bic">SWIFT/BIC</label>
             <input
-              type="number"
-              step="0.01"
-              id="tax"
+              type="text"
+              id="swift-bic"
               class="form-control"
-              placeholder="Entrez le taux de taxe de la facture"
-              v-model="addInvoiceData.tax"
-              required
+              placeholder="Entrez le code SWIFT/BIC de l'entreprise"
+              v-model.trim="editSupplierData.swift_bic"
             />
           </div>
           <div class="form-group">
-            <label for="status">Statut*</label>
-            <select class="custom-select" v-model="addInvoiceData.status">
-              <option selected>Sélectionnez le statut de la facture</option>
-              <option value="emitted">Emise</option>
-              <option value="received">Reçue</option>
-              <option value="reminder">Relance</option>
-              <option value="payed">Payée</option>
-            </select>
+            <label for="account">Numéro de compte</label>
+            <input
+              type="text"
+              id="account"
+              class="form-control"
+              placeholder="Entrez le numéro de compte de l'entreprise"
+              v-model.trim="editSupplierData.account"
+            />
           </div>
         </div>
       </div>
       <div class="row float-right">
-        <button type="sumbit" class="btn-lg btn-primary">/ AJOUTER LA FACTURE</button>
+        <button type="sumbit" class="btn-lg btn-primary">/ MODIFIER LE FOURNISSEUR</button>
       </div>
     </form>
   </div>
@@ -97,32 +115,56 @@
 
 <script>
 export default {
-  name: "AddInvoice",
+  name: "AddSupplier",
   data() {
     return {
-      addInvoiceData: {
-        invoice_num: "",
-        date: "",
-        command_num: "",
-        price_notax: "",
-        tax: "",
-        status: "",
-        supplier_id: ""
-      }
+      editSupplierData: {
+        company: "",
+        adress: "",
+        postcode: "",
+        city: "",
+        country: "",
+        phone: "",
+        iban: "",
+        swift_bic: "",
+        account: ""
+      },
+      rawPhone: ""
     };
   },
   methods: {
-    addInvoice: async function() {
-      const data = this.addInvoiceData;
-      this.$http.post(`${rootURL}invoices/`, data).then(
+    getSupplier: async function(id) {
+      this.$http.get(`${rootURL}suppliers/${id}`).then(
         response => {
-          this.$router.push("/factures");
-          alert("La facture a bien été ajoutée");
+          //Pas le même format qu'avec les factures oO
+          this.editSupplierData = response.body;
         },
         response => {
-          alert("erreur : ", response);
+          alert("Erreur lors de la connexion à l'API", response);
         }
       );
+    },
+    editSupplier: async function(id) {
+      this.editSupplierData.phone = this.cleanPhone;
+      const data = this.editSupplierData;
+      return this.$http.put(`${rootURL}suppliers/${id}`, data).then(
+        response => {
+          this.$router.go(-1);
+          alert("Le fournisseur a bien été modifiée");
+        },
+        response => {
+          alert("Erreur lors de la connexion à l'API", response);
+        }
+      );
+    }
+  },
+  created() {
+    this.getSupplier(this.$route.params.id);
+  },
+  computed: {
+    cleanPhone: function() {
+      this.rawPhone = this.editSupplierData.phone;
+      return this.rawPhone.replace(/ /g, "");
     }
   }
 };
