@@ -42,7 +42,6 @@ export default {
       );
     },
     deleteSupplier: async function(id) {
-      console.log(id);
       let question = confirm("Voulez-vous supprimer ce fournisseur ?");
       if (question == true) {
         this.$http.delete(`${rootURL}suppliers/${id}`).then(

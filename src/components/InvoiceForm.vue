@@ -91,6 +91,7 @@
           </div>
         </div>
       </div>
+      <ButtonBack class="float-left" />
       <div class="row float-right">
         <button type="sumbit" class="btn-lg btn-primary">/ {{action}} LA FACTURE</button>
       </div>
@@ -99,8 +100,11 @@
 </template>
 
 <script>
+import ButtonBack from "./Buttons/ButtonBack";
+
 export default {
   name: "AddForm",
+  components: { ButtonBack },
   props: {
     data: {
       type: Object,

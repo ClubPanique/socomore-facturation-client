@@ -32,7 +32,6 @@
             <ButtonEdit @clicked="$router.push(`${path}/modifier/${list[index].id}`)" />
           </td>
           <td class="text-center align-middle">
-            <!-- <ButtonDelete @clicked="deleteSupplier(list[index].id)" /> -->
             <ButtonDelete @clicked="onDelete(list[index].id)" />
           </td>
           <td class="text-center align-middle">
@@ -83,7 +82,8 @@ export default {
       let dateFormat = date.slice(0, 10).replace(/[-]/g, "/");
       let jsDate = new Date(Date.parse(dateFormat));
       let year = jsDate.getFullYear();
-      let month = jsDate.getMonth();
+      //J'ajout 1 au mois car je ne sais pas pourquoi, il y a un décalage oO
+      let month = jsDate.getMonth() + 1;
       let day = jsDate.getDate();
       if (year) {
         if (day < 10 && month < 10) return `0${day}/0${month}/${year}`;
@@ -113,9 +113,6 @@ export default {
       return status;
     }
   },
-  mounted() {
-    console.log(this.$route.params.id);
-  },
   computed: {
     filteredList: function() {
       return this.list.filter(item => {
@@ -126,9 +123,6 @@ export default {
         }
       });
     }
-  },
-  created() {
-    console.log(this.list);
   }
 };
 </script>

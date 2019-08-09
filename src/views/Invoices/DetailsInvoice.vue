@@ -1,5 +1,6 @@
 <template>
   <div id="invoice-details">
+    <ButtonBack class="float-right" />
     <h1 class="text-primary pb-3">Informations sur la facture n° {{$route.params.id}}</h1>
     <div class="row">
       <div class="col pl-5">
@@ -25,12 +26,22 @@
         <p>{{translateStatus(invoice.status)}}</p>
       </div>
     </div>
+    <router-link :to="`/factures/modifier/${invoice.id}`" tag="span">
+      <button class="btn-lg btn-secondary float-left text-light">/ MODIFIER LA FACTURE</button>
+    </router-link>
+
+    <router-link :to="`/fournisseurs/${invoice.supplier_id}`" tag="span">
+      <button class="btn-lg btn-primary float-right text-light">/ VOIR LE FOURNISSEUR</button>
+    </router-link>
   </div>
 </template>
 
 <script>
+import ButtonBack from "../../components/Buttons/ButtonBack";
+
 export default {
   name: "Details",
+  components: { ButtonBack },
   data() {
     return {
       invoice: ""
@@ -41,7 +52,6 @@ export default {
       this.$http.get(`${rootURL}invoices/${id}`).then(
         response => {
           this.invoice = response.body[0];
-          console.log(this.invoice);
         },
         response => {
           alert("Erreur lors de la connexion à l'API", response);

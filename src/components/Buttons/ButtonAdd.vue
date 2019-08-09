@@ -10,6 +10,11 @@
 <script>
 export default {
   name: "ButtonAdd",
-  props: ["button"]
+  props: {
+    button: {
+      type: Object,
+      required: true
+    }
+  }
 };
 </script>

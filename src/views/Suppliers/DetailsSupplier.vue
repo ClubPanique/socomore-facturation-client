@@ -1,5 +1,6 @@
 <template>
   <div id="supplier-details">
+    <ButtonBack class="float-right" />
     <h1 class="text-primary pb-3">Informations sur le fournisseur n° {{$route.params.id}}</h1>
     <div class="row">
       <div class="col pl-5">
@@ -27,16 +28,18 @@
         <p>{{supplier.account}}</p>
       </div>
     </div>
-    <InvoicesList class="pt-5" />
+    <h1 class="text-primary">Factures associées au fournisseur</h1>
+    <InvoicesList class="pt-2" />
   </div>
 </template>
 
 <script>
 import InvoicesList from "../../components/InvoicesList";
+import ButtonBack from "../../components/Buttons/ButtonBack";
 
 export default {
   name: "Details",
-  components: { InvoicesList },
+  components: { InvoicesList, ButtonBack },
   data() {
     return {
       supplier: []
@@ -46,7 +49,6 @@ export default {
     getSupplier: async function(id) {
       this.$http.get(`${rootURL}suppliers/${id}`).then(
         response => {
-          //Pas le même format qu'avec les factures oO
           this.supplier = response.body;
         },
         response => {
