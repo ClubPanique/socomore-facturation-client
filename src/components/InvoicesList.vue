@@ -49,7 +49,6 @@ export default {
         //Les factures d'un fournisseur si on est sur la page fournisseurs/:id
         this.$http.get(`${rootURL}invoices/supplier/${id}`).then(
           response => {
-            console.log(response);
             this.list = response.body;
           },
           response => {
