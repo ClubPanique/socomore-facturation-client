@@ -33,8 +33,8 @@ export default {
   data() {
     return {
       list: [],
-      columns: ["Date", "Fournisseur", "Montant", "Statut"],
-      types: ["date", "company", "price_notax", "status"],
+      columns: ["Date", "Fournisseur", "Montant TTC", "Statut"],
+      types: ["date", "company", "totalPrice", "status"],
       path: "factures",
       loading: true,
       color: "#e85e0e"
@@ -48,6 +48,7 @@ export default {
         this.$http.get(`${rootURL}invoices/`).then(
           response => {
             this.list = response.body;
+            this.getTotalPrice(this.list);
             this.loading = false;
           },
           response => {
@@ -59,12 +60,20 @@ export default {
         this.$http.get(`${rootURL}invoices/supplier/${id}`).then(
           response => {
             this.list = response.body;
+            this.getTotalPrice(this.list);
             this.loading = false;
           },
           response => {
             alert("Problème lors de la requête à l'API", response);
           }
         );
+      }
+    },
+    //Fonction pour calculer le prix total de chaque facture avec le prix HT et la taxe.
+    getTotalPrice: function(list) {
+      for (let invoice of list) {
+        const totalPrice = invoice.price_notax * (1 + invoice.tax / 100);
+        invoice.totalPrice = Math.round(totalPrice * 100) / 100;
       }
     },
     //Fonction pour supprimer une facture, selon son id.
@@ -83,7 +92,7 @@ export default {
       }
     }
   },
-  //Appel de la fonction à la création du composant, en lui passant l'id via $route.
+  //Appel de la fonction à la création du composant, en lui passant l'id via $route s'il y a lieu (pour la page fournisseur).
   created() {
     this.listInvoices(this.$route.params.id);
   }

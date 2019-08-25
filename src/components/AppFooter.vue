@@ -13,10 +13,3 @@ export default {
   name: "AppFooter"
 };
 </script>
-
-<style scoped>
-.vertical-align {
-  display: flex;
-  align-items: center;
-}
-</style>

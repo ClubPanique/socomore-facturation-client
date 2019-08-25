@@ -6,7 +6,7 @@
     </div>
     <!-- Condition pour afficher le footer en bas de la page seulement sur la home page -->
     <div v-if="this.$route.path == '/'">
-      <AppFooter class="mt-3" style="position: absolute; bottom: 0; width: 100%;" />
+      <AppFooter class="mt-sm-4" style="position: absolute; bottom: 0; width: 100%;" />
     </div>
     <div v-else>
       <AppFooter />
@@ -20,10 +20,7 @@ import AppFooter from "./components/AppFooter";
 
 export default {
   name: "app",
-  components: { AppHeader, AppFooter },
-  created() {
-    console.log(this.$route.path);
-  }
+  components: { AppHeader, AppFooter }
 };
 </script>
 

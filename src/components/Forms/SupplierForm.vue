@@ -12,8 +12,13 @@
               class="form-control"
               placeholder="Entrez le nom de l'entreprise"
               v-model.trim="data.company"
-              required
+              name="entreprise"
+              v-validate="'required|max:30'"
             />
+            <span
+              v-if="errors.has('entreprise')"
+              class="text-danger"
+            >{{ errors.first('entreprise') }}</span>
           </div>
           <div class="form-group">
             <label for="adress">Adresse*</label>
@@ -23,8 +28,10 @@
               class="form-control"
               placeholder="Entrez l'adresse de l'entreprise"
               v-model.trim="data.adress"
-              required
+              name="adresse"
+              v-validate="'required|max:30'"
             />
+            <span v-if="errors.has('adresse')" class="text-danger">{{ errors.first('adresse') }}</span>
           </div>
           <div class="form-group">
             <label for="postcode">Code postal*</label>
@@ -34,8 +41,13 @@
               class="form-control"
               placeholder="Entrez le code postal de l'entreprise"
               v-model.trim="data.postcode"
-              required
+              name="code postal"
+              v-validate="'required|max:10'"
             />
+            <span
+              v-if="errors.has('code postal')"
+              class="text-danger"
+            >{{ errors.first('code postal') }}</span>
           </div>
           <div class="form-group">
             <label for="city">Ville*</label>
@@ -45,8 +57,10 @@
               class="form-control"
               placeholder="Entrez la ville de l'entreprise"
               v-model.trim="data.city"
-              required
+              name="ville"
+              v-validate="'required|max:30'"
             />
+            <span v-if="errors.has('ville')" class="text-danger">{{ errors.first('ville') }}</span>
           </div>
           <div class="form-group">
             <label for="country">Pays*</label>
@@ -56,8 +70,10 @@
               class="form-control"
               placeholder="Entrez le pays de l'entreprise"
               v-model.trim="data.country"
-              required
+              name="pays"
+              v-validate="'required|max:20'"
             />
+            <span v-if="errors.has('pays')" class="text-danger">{{ errors.first('pays') }}</span>
           </div>
           <div class="form-group">
             <label for="phone">Téléphone</label>
@@ -80,8 +96,10 @@
               class="form-control"
               placeholder="Entrez l'IBAN de l'entreprise"
               v-model.trim="data.iban"
-              required
+              name="iban"
+              v-validate="'required|max:34'"
             />
+            <span v-if="errors.has('iban')" class="text-danger">{{ errors.first('iban') }}</span>
           </div>
           <div class="form-group">
             <label for="swift-bic">SWIFT/BIC</label>
@@ -131,7 +149,11 @@ export default {
   },
   methods: {
     onSubmit: function() {
-      this.$emit("formSubmit");
+      this.$validator.validateAll().then(() => {
+        if (!this.errors.any()) {
+          this.$emit("formSubmit");
+        }
+      });
     }
   }
 };

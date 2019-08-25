@@ -27,8 +27,10 @@
               class="form-control"
               placeholder="Entrez le numéro de la facture"
               v-model="data.invoice_num"
-              required
+              name="facture"
+              v-validate="'required|max:20'"
             />
+            <span v-if="errors.has('facture')" class="text-danger">{{ errors.first('facture') }}</span>
           </div>
           <div class="form-group">
             <label for="date">Date*</label>
@@ -38,7 +40,8 @@
               class="form-control"
               placeholder="Entrez la date de la facture"
               v-model="data.date"
-              required
+              name="date"
+              v-validate="'required'"
             />
           </div>
           <div class="form-group">
@@ -49,8 +52,10 @@
               class="form-control"
               placeholder="Entrez le numéro de commande"
               v-model="data.command_num"
-              required
+              name="commande"
+              v-validate="'required|max:20'"
             />
+            <span v-if="errors.has('commande')" class="text-danger">{{ errors.first('commande') }}</span>
           </div>
         </div>
         <div class="col-sm">
@@ -64,8 +69,10 @@
               class="form-control"
               placeholder="Entrez le prix HT de la facture"
               v-model="data.price_notax"
-              required
+              name="prix"
+              v-validate="'required|decimal:2'"
             />
+            <span v-if="errors.has('prix')" class="text-danger">{{ errors.first('prix') }}</span>
           </div>
           <div class="form-group">
             <label for="tax">Taxe*</label>
@@ -76,8 +83,10 @@
               class="form-control"
               placeholder="Entrez le taux de taxe de la facture"
               v-model="data.tax"
-              required
+              name="taxe"
+              v-validate="'required|decimal:2'"
             />
+            <span v-if="errors.has('taxe')" class="text-danger">{{ errors.first('taxe') }}</span>
           </div>
           <div class="form-group">
             <label for="status" id="status">Statut*</label>
@@ -121,7 +130,11 @@ export default {
   },
   methods: {
     onSubmit: function() {
-      this.$emit("formSubmit");
+      this.$validator.validateAll().then(() => {
+        if (!this.errors.any()) {
+          this.$emit("formSubmit");
+        }
+      });
     }
   }
 };
