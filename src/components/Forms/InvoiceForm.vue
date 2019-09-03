@@ -1,6 +1,11 @@
 <template>
   <div id="invoice-form">
-    <form @submit.prevent="onSubmit">
+    <form
+      @submit.prevent="onSubmit"
+      enctype="multipart/form-data"
+      action="upload/"
+      id="invoiceForm"
+    >
       <div class="row">
         <div class="col-sm">
           <h2>Informations sur la facture</h2>
@@ -98,6 +103,10 @@
               <option value="payed">Payée</option>
             </select>
           </div>
+          <div class="form-group">
+            <p>{{data.pdf}}</p>
+            <input type="file" @change="processFile($event)" name="pdf" />
+          </div>
         </div>
       </div>
       <ButtonBack class="float-left m-1" />
@@ -114,6 +123,11 @@ import ButtonBack from "../Buttons/ButtonBack";
 export default {
   name: "InvoiceForm",
   components: { ButtonBack },
+  data() {
+    return {
+      upload: null
+    };
+  },
   props: {
     data: {
       type: Object,
@@ -135,6 +149,9 @@ export default {
           this.$emit("formSubmit");
         }
       });
+    },
+    processFile: function(event) {
+      this.data.pdf = event.target.files[0];
     }
   }
 };

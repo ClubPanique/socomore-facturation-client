@@ -19,8 +19,7 @@ Vue.use(VeeValidate);
 Vue.config.productionTip = false;
 
 //Placer l'URL de base de l'API ici :
-window.rootURL =
-  'https://app-8d67b1a8-1400-4290-a3ca-ebe3f7d2d629.cleverapps.io/api/v1/';
+window.rootURL = 'http://localhost:3000/api/v1/';
 
 /* url pour version locale : 'http://localhost:3000/api/v1/' */
 /* url pour version déployée : 'http://app-8d67b1a8-1400-4290-a3ca-ebe3f7d2d629.cleverapps.io/api/v1/' */
