@@ -15,10 +15,9 @@
               name="entreprise"
               v-validate="'required|max:30'"
             />
-            <span
-              v-if="errors.has('entreprise')"
-              class="text-danger"
-            >{{ errors.first('entreprise') }}</span>
+            <span v-if="errors.has('entreprise')" class="text-danger">{{
+              errors.first('entreprise')
+            }}</span>
           </div>
           <div class="form-group">
             <label for="adress">Adresse*</label>
@@ -31,7 +30,9 @@
               name="adresse"
               v-validate="'required|max:30'"
             />
-            <span v-if="errors.has('adresse')" class="text-danger">{{ errors.first('adresse') }}</span>
+            <span v-if="errors.has('adresse')" class="text-danger">{{
+              errors.first('adresse')
+            }}</span>
           </div>
           <div class="form-group">
             <label for="postcode">Code postal*</label>
@@ -44,10 +45,9 @@
               name="code postal"
               v-validate="'required|max:10'"
             />
-            <span
-              v-if="errors.has('code postal')"
-              class="text-danger"
-            >{{ errors.first('code postal') }}</span>
+            <span v-if="errors.has('code postal')" class="text-danger">{{
+              errors.first('code postal')
+            }}</span>
           </div>
           <div class="form-group">
             <label for="city">Ville*</label>
@@ -60,7 +60,9 @@
               name="ville"
               v-validate="'required|max:30'"
             />
-            <span v-if="errors.has('ville')" class="text-danger">{{ errors.first('ville') }}</span>
+            <span v-if="errors.has('ville')" class="text-danger">{{
+              errors.first('ville')
+            }}</span>
           </div>
           <div class="form-group">
             <label for="country">Pays*</label>
@@ -73,7 +75,9 @@
               name="pays"
               v-validate="'required|max:20'"
             />
-            <span v-if="errors.has('pays')" class="text-danger">{{ errors.first('pays') }}</span>
+            <span v-if="errors.has('pays')" class="text-danger">{{
+              errors.first('pays')
+            }}</span>
           </div>
           <div class="form-group">
             <label for="phone">Téléphone</label>
@@ -99,7 +103,9 @@
               name="iban"
               v-validate="'required|max:34'"
             />
-            <span v-if="errors.has('iban')" class="text-danger">{{ errors.first('iban') }}</span>
+            <span v-if="errors.has('iban')" class="text-danger">{{
+              errors.first('iban')
+            }}</span>
           </div>
           <div class="form-group">
             <label for="swift-bic">SWIFT/BIC</label>
@@ -125,36 +131,38 @@
       </div>
       <ButtonBack class="float-left m-1" />
       <div class="row float-right m-1">
-        <button type="sumbit" class="btn-lg btn-primary">/ {{action}} LE FOURNISSEUR</button>
+        <button type="sumbit" class="btn-lg btn-primary">
+          / {{ action }} LE FOURNISSEUR
+        </button>
       </div>
     </form>
   </div>
 </template>
 
 <script>
-import ButtonBack from "../Buttons/ButtonBack";
+import ButtonBack from '../Buttons/ButtonBack';
 
 export default {
-  name: "SupplierForm",
-  components: { ButtonBack },
+  name: 'SupplierForm',
+  components: {ButtonBack},
   props: {
     data: {
       type: Object,
-      required: true
+      required: true,
     },
     action: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   methods: {
     onSubmit: function() {
       this.$validator.validateAll().then(() => {
         if (!this.errors.any()) {
-          this.$emit("formSubmit");
+          this.$emit('formSubmit');
         }
       });
-    }
-  }
+    },
+  },
 };
 </script>
