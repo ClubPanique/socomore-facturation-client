@@ -27,19 +27,14 @@ export default {
         price_notax: "",
         tax: "",
         status: "",
-        supplier_id: "",
-        pdf: ""
+        supplier_id: ""
       },
       action: "AJOUTER"
     };
   },
   methods: {
     addInvoice: async function() {
-      let data = new FormData();
-      //Boucle pour compléter l'objet data (qui est un FormData) avec chaque élément de l'objet addInvoiceData
-      for (let [key, value] of Object.entries(this.addInvoiceData)) {
-        data.append(key, value);
-      }
+      const data = this.addInvoiceData;
       this.$http.post(`${rootURL}invoices/`, data).then(
         response => {
           this.$router.push("/factures");
@@ -55,8 +50,8 @@ export default {
         response => {
           this.suppliers = response.body;
         },
-        response => {
-          alert("Erreur lors de la connexion à l'API", response);
+        error => {
+          return error;
         }
       );
     }

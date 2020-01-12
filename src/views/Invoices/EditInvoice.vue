@@ -8,7 +8,6 @@
       v-model="editInvoiceData"
       @formSubmit="editInvoice($route.params.id)"
     />
-    <a :href="pdfUrl">Voir la facture</a>
   </div>
 </template>
 
@@ -28,8 +27,7 @@ export default {
         price_notax: "",
         tax: "",
         status: "",
-        supplier_id: "",
-        pdf: ""
+        supplier_id: ""
       },
       action: "MODIFIER"
     };
@@ -39,12 +37,6 @@ export default {
       this.$http.get(`${rootURL}invoices/${id}`).then(
         response => {
           this.editInvoiceData = response.body[0];
-          console.log(response.body);
-          /* this.editInvoiceData.pdf = new Blob(); */
-          /* this.editInvoiceData.pdf = response.body[0].pdf.blob(); */
-
-          /* this.pdfUrl = URL.createObjectURL(response.body[0].pdf);
-          console.log(this.pdfUrl); */
           let dateFormat = this.editInvoiceData.date.slice(0, 10);
           this.editInvoiceData.date = dateFormat;
         },
@@ -79,15 +71,6 @@ export default {
   created() {
     this.getInvoice(this.$route.params.id);
     this.getSuppliers();
-  },
-  computed: {
-    pdfUrl() {
-      const arrayBuffer = new Uint8Array(this.editInvoiceData.pdf);
-      console.log(arrayBuffer);
-      const blob = new Blob([arrayBuffer], { type: "application/pdf" });
-
-      return window.URL.createObjectURL(blob);
-    }
   }
 };
 </script>
